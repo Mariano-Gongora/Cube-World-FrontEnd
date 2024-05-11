@@ -7,30 +7,69 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
     const [imageIndex, setImageIndex] = useState(0);
     const [showModal, setShowModal] = useState(true);
 
-    const { addToCart, initializeCart } = useCart();
+    const {user}=useUser();
+
+    const { updateCart } = useCart();
 
     const { cart } = useCart();
 
-    const handleAddToCartClick = (selectedProduct) => {
+    const handleAddToCartClick = async(selectedProduct) => {
+        let data
         if(localStorage.getItem("user") && localStorage.getItem("cart").length<1){
+            
             localStorage.setItem("cart",selectedProduct.id)
-            initializeCart(localStorage.getItem("cart").split(','))
+            updateCart(localStorage.getItem("cart").split(','))
+            let response1= await fetch(`http://localhost:8080/getUser/${user}`)
+            data=await response1.json();
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    FirstName: data.FirstName,
+                    LastName: data.LastName,
+                    Email: data.Email,
+                    Password: data.Password,
+                    CartList: JSON.parse("[" + localStorage.getItem("cart") + "]")
+
+                })
+            };
+            const response2 = await fetch(`http://localhost:8080/updateUser/${user}`, requestOptions);
+            const data2 = await response2.json();
+            
             
         }
         else if(localStorage.getItem("user")){
             const prevCart=localStorage.getItem("cart")
             const fullList=prevCart+","+selectedProduct.id
             localStorage.setItem("cart",fullList)
-            initializeCart(localStorage.getItem("cart").split(','))
+            updateCart(localStorage.getItem("cart").split(','))
+            let response= await fetch(`http://localhost:8080/getUser/${user}`)
+            data=await response.json();
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    FirstName: data.FirstName,
+                    LastName: data.LastName,
+                    Email: data.Email,
+                    Password: data.Password,
+                    CartList: JSON.parse("[" + localStorage.getItem("cart") + "]")
+
+                })
+            };
+            const response2 = await fetch(`http://localhost:8080/updateUser/${user}`, requestOptions);
+            const data2 = await response2.json();
+            
+
         }
         else if(localStorage.getItem("cart").length<1){
             localStorage.setItem("cart",selectedProduct.id)
-            initializeCart(localStorage.getItem("cart").split(','))
+            updateCart(localStorage.getItem("cart").split(','))
         }else{
             const prevCart=localStorage.getItem("cart")
             const fullList=prevCart+","+selectedProduct.id
             localStorage.setItem("cart",fullList)
-            initializeCart(localStorage.getItem("cart").split(','))
+            updateCart(localStorage.getItem("cart").split(','))
         }
 
     };

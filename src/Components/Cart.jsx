@@ -6,17 +6,33 @@ import { TbTrashX } from "react-icons/tb";
 import ProductView from "../Components/ProductView.jsx";
 
 export const Cart = () => {
-    const { cart, initializeCart } = useCart();
+    const { cart, updateCart } = useCart();
     const { user, loggedIn } = useUser();
     const [items, setItems] = useState([]);
     const [trigger,setTrigger]= useState(false);
 
     const { removeFromCart } = useCart();
 
-    const onTrashClick = (key) => {
-        console.log("this is key: "+ key)
+    const onTrashClick = async (key) => {
+        let data
         removeFromCart(key);
         setTrigger(!trigger);
+        let response1= await fetch(`http://localhost:8080/getUser/${user}`)
+            data=await response1.json();
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    FirstName: data.FirstName,
+                    LastName: data.LastName,
+                    Email: data.Email,
+                    Password: data.Password,
+                    CartList: JSON.parse("[" + localStorage.getItem("cart") + "]")
+
+                })
+            };
+            const response2 = await fetch(`http://localhost:8080/updateUser/${user}`, requestOptions);
+            const data2 = await response2.json();
     };
 
     const fetchItemsFromIds = (async () => {
@@ -36,7 +52,7 @@ export const Cart = () => {
 
     useEffect(() => {
         if (localStorage.getItem("cart")) {
-            initializeCart(localStorage.getItem("cart").split(','))
+            updateCart(localStorage.getItem("cart").split(','))
         }
     }, []);
 

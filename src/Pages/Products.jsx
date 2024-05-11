@@ -2,7 +2,7 @@ import '../Styles.css'
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart,FaSearch } from "react-icons/fa";
 import ProductView from "../Components/ProductView.jsx";
 import Cart from '../Components/Cart.jsx';
 import React from "react"
@@ -40,6 +40,10 @@ export const Products = () => {
         navigate(`/products/${searchTerm}`);
     };
 
+    const onSearchPress= () =>{
+        navigate(`/products/${searchTerm}`);
+    }
+
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
@@ -57,12 +61,13 @@ export const Products = () => {
             <div className="header">
                 <div className='search-bar-pair'>
                     <input type="text" onKeyDown={(event) => { if (event.key === "Enter") { onEnterPress() } }} value={searchTerm} onChange={handleInputChange} placeholder="Search" className='search-input' />
+                    <button className='search-btn' onClick={onSearchPress}><FaSearch /></button>
                 </div>
                 <div>
                     <label className='Cube-World-Logo' onClick={handle_logo_click}>Cube World</label>
                 </div>
                 <div>
-                    <label className='login-signup-label' onClick={handle_login_signup_click}>Login/Sign Up</label>
+                {localStorage.getItem("user") ? <label className='login-signup-label' onClick={handle_login_signup_click}>View Profile</label> : <label className='login-signup-label' onClick={handle_login_signup_click}>Login/Sign Up</label> }
                 </div>
 
             </div>

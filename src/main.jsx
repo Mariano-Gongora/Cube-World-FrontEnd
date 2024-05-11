@@ -35,12 +35,7 @@ export const CartProvider = ({ children }) => {
   const [addTrigger,setaddTrigger]= useState(false); //checks if the user exists
   const [removeTrigger,setremoveTrigger]= useState(false);
 
-  const addToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
-    setaddTrigger(!addTrigger);
-  };
-
-  const initializeCart = (list) =>{
+  const updateCart = (list) =>{
     setCart(list);
   };
 
@@ -53,18 +48,16 @@ export const CartProvider = ({ children }) => {
     if(!localStorage.getItem("user"))
       localStorage.setItem("cart",[])
     else if(cart.length>0){
-      console.log("initialized cart is fromUseEffect #1:"+cart)
       localStorage.setItem("cart",cart) 
     }
     },[addTrigger])
 
     useEffect(()=>{//useEffect #2
-      console.log("yo"+cart)
       localStorage.setItem("cart",cart)
       },[removeTrigger])
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, initializeCart}}>
+    <CartContext.Provider value={{ cart, removeFromCart, updateCart}}>
       {children}
     </CartContext.Provider>
   );
