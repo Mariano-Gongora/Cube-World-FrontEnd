@@ -50,7 +50,7 @@ body {
     display: flex;
     justify-content: center;
     color: white;
-    padding-left: 50px;
+    padding-left: 10px;
     cursor: pointer;
 
 }
@@ -219,6 +219,17 @@ body {
     justify-content: center;
     height: 30px;
     border-radius: 5rem;
+}
+
+.search-btn{
+    background-color: black;
+    border: #fff5ef;
+    color: white;
+    cursor: pointer;
+}
+
+.search-bar-pair{
+    display: flex;
 }
 
 .product-page-header {
