@@ -3,13 +3,13 @@ import '../Styles.css'
 import React, { useState, useEffect } from "react";
 import { useUser } from '../main';
 import { useNavigate } from 'react-router-dom';
+import Homebar from '../Components/Homebar.jsx';
 
 export const Admin = () => {
 
     const { user } = useUser();
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null);
     const [NewImage, setNewImage] = useState();
     const [ImageSelected, setImageSelected] = useState(false);
 
@@ -47,9 +47,7 @@ export const Admin = () => {
                 Images: newList
             })
         };
-        const response = await fetch(`http://localhost:8080/updateProduct/${product.id}`, Options);
-        const data = await response.json();
-        window.location.reload();
+        await fetch(`http://localhost:8080/updateProduct/${product.id}`, Options);
     };
 
     const handleChange = (e) => {
@@ -81,16 +79,14 @@ export const Admin = () => {
                 Images: newList
             })
         };
-        const response = await fetch(`http://localhost:8080/updateProduct/${product.id}`, Options);
-        const data = await response.json();
-        window.location.reload();
+        await fetch(`http://localhost:8080/updateProduct/${product.id}`, Options);
     }
 
     const handleAddProductClick = async (ProductName, Price, description, newImage) => {
         var list= new Array();
         list.push(NewImage)
         if (ProductName === "" || Price === "" || description === "" || newImage === "") {
-            alert("Fuck you")
+            alert("Missing a field for new item")
         }
         else {
             const Options = {
@@ -104,12 +100,13 @@ export const Admin = () => {
                     Images: list
                 })
             };
-            const response = await fetch(`http://localhost:8080/setProduct`, Options);
-            const data = await response.json();
+            await fetch(`http://localhost:8080/setProduct`, Options);
         }
     }
 
     return (
+        <>
+        <Homebar/>
         <div>
             <section className='products-page'>
                 {products.length === 0 ? (
@@ -153,6 +150,7 @@ export const Admin = () => {
                 </div>
             </section>
         </div>
+        </>
     );
 };
 

@@ -333,3 +333,55 @@ body {
     padding-right: 20px;
     padding-bottom: 20px;
 }
+
+.About{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+    padding-left : 50px;
+    padding-right : 50px;
+    padding-bottom: 30px;
+}
+
+.img-div{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+.img{
+    height: 500px;
+
+}
+
+.contact-img{
+    height: 250px;
+}
+
+.contact-img-div{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    cursor: pointer;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.Contact-email{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+    padding-left : 50px;
+    padding-right : 50px;
+    padding-bottom: 30px;
+    text-decoration: underline;
+    cursor: pointer;
+}

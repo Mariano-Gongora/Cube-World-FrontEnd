@@ -3,8 +3,8 @@ import '../Styles.css'
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { FaSearch } from "react-icons/fa";
 import { useCart, useUser } from '../main';
+import Homebar from '../Components/Homebar.jsx';
 
 export const Login_SignUp = () => {
 
@@ -14,13 +14,10 @@ export const Login_SignUp = () => {
     const [Password, setPassword] = useState("");
     const [toggleSignUp, setToggleSignUp] = useState(true);
     const { search } = useParams();
-    const [searchTerm, setSearchTerm] = useState('');
     const { updateCart } = useCart();
-    const { user,LogInState, setUserID } = useUser();
+    const { LogInState, setUserID } = useUser();
+    const navigate = useNavigate();
 
-    const onSearchPress = () => {
-        navigate(`/products/${searchTerm}`);
-    }
 
     async function signUp() {
         if ((FirstName === "") || (LastName === "") || (Email === "") || (Password === "")) {
@@ -138,9 +135,7 @@ export const Login_SignUp = () => {
         setPassword("")
     }
 
-    const navigate = useNavigate();
-    const handle_login_signup_click = () => navigate('/login_signup');
-    const handle_logo_click = () => navigate('/');
+ 
 
     useEffect(() => {
         if (search) {
@@ -154,14 +149,6 @@ export const Login_SignUp = () => {
         }
     }, [search]);
 
-    const onEnterPress = () => {
-        navigate(`/products/${searchTerm}`);
-    };
-
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
     const Log_out_click=()=>{
         localStorage.removeItem("user")
         setUserID("")
@@ -170,18 +157,7 @@ export const Login_SignUp = () => {
 
     return (
         <>
-            <div className="header">
-                <div className='search-bar-pair'>
-                    <input type="text" onKeyDown={(event) => { if (event.key === "Enter") { onEnterPress() } }} value={searchTerm} onChange={handleInputChange} placeholder="Search" className='search-input' />
-                    <button className='search-btn' onClick={onSearchPress}><FaSearch /></button>
-                </div>
-                <div>
-                    <label className='Cube-World-Logo' onClick={handle_logo_click}>Cube World</label>
-                </div>
-                <div>
-                {localStorage.getItem("user") ? <label className='login-signup-label' onClick={handle_login_signup_click}>View Profile</label> : <label className='login-signup-label' onClick={handle_login_signup_click}>Login/Sign Up</label> }
-                </div>
-            </div>
+            <Homebar/>
             {localStorage.getItem("user") ?
                 <div className='sign-up-log-in-page'>
                     <div className='log-in'>Logged in as: {localStorage.getItem("user")}<button onClick={Log_out_click}>Log Out</button></div>
