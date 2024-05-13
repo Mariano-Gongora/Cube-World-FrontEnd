@@ -17,7 +17,7 @@ export const ContactUs = () => {
                     <a href='https://mariano-gongora.github.io/Portfolio/'><img className="contact-img" src={Person}></img></a>
                 </div>
             </div>
-            <h1 className='Contact-email'>mariano.gongora55@gmail.com</h1>
+            <h1 className='Contact-email' ><a href='mailto:mariano.gongora55@gmail.com'>mariano.gongora55@gmail.com</a></h1>
         </>
     );
 };
