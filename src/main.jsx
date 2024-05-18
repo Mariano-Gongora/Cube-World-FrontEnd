@@ -49,7 +49,7 @@ export const CartProvider = ({ children }) => {
     if(localStorage.getItem("user"))
       localStorage.setItem("cart",[])
     if(!localStorage.getItem("user"))
-      localStorage.setItem("cart",[])
+      localStorage.setItem("cart",cart)
     else if(cart.length>0){
       localStorage.setItem("cart",cart) 
     }

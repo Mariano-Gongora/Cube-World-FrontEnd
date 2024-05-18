@@ -30,7 +30,7 @@ export const Homebar = () => {
         <div className="header">
         <div className='search-bar-pair'>
           <input type="text" value={searchTerm} onKeyDown={(event) => { if (event.key === "Enter") { onEnterPress() } }} onChange={handleInputChange} placeholder="Search" className='search-input' />
-          <button className='search-btn' onClick={onSearchPress}><FaSearch /></button>
+          <button className='search-btn' onClick={onSearchPress} ><FaSearch size={25}/></button>
         </div>
         
         <div>
