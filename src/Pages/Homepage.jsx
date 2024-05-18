@@ -24,7 +24,7 @@ export const Home = () => {
     }
     else {
       var newList = [];
-      localStorage.setItem("cart", newList)
+      localStorage.setItem("cart", JSON.stringify(newList))
     }
   }, []);
 
