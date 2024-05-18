@@ -62,7 +62,7 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
             
 
         }
-        else if(localStorage.getItem("cart").length<1){
+        else if(localStorage.getItem("cart").length<1){ 
             localStorage.setItem("cart",selectedProduct.id)
             updateCart(localStorage.getItem("cart").split(','))
         }
