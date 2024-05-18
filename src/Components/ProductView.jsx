@@ -19,7 +19,7 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
             
             localStorage.setItem("cart",selectedProduct.id)
             updateCart(localStorage.getItem("cart").split(','))
-            let response1= await fetch(`http://localhost:8080/getUser/${user}`)
+            let response1= await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getUser/${user}`)
             data=await response1.json();
             const requestOptions = {
                 method: 'PUT',
@@ -33,7 +33,7 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
 
                 })
             };
-            const response2 = await fetch(`http://localhost:8080/updateUser/${user}`, requestOptions);
+            const response2 = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/updateUser/${user}`, requestOptions);
             const data2 = await response2.json();
             
             
@@ -43,7 +43,7 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
             const fullList=prevCart+","+selectedProduct.id
             localStorage.setItem("cart",fullList)
             updateCart(localStorage.getItem("cart").split(','))
-            let response= await fetch(`http://localhost:8080/getUser/${user}`)
+            let response= await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getUser/${user}`)
             data=await response.json();
             const requestOptions = {
                 method: 'PUT',
@@ -57,7 +57,7 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
 
                 })
             };
-            const response2 = await fetch(`http://localhost:8080/updateUser/${user}`, requestOptions);
+            const response2 = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/updateUser/${user}`, requestOptions);
             const data2 = await response2.json();
             
 

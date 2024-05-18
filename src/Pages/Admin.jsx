@@ -18,7 +18,7 @@ export const Admin = () => {
             if (!user) {
                 navigate('/')
             }
-            const response = await fetch(`http://localhost:8080/getUser/${user}`)
+            const response = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getUser/${user}`)
             const data = await response;
             if (data.admin === false) {
                 navigate('/')
@@ -26,7 +26,7 @@ export const Admin = () => {
         }
         apiCall();
 
-        fetch(`http://localhost:8080/Products`)
+        fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products`)
             .then(response => response.json())
             .then(data => setProducts(data));
     }, []);
@@ -47,7 +47,7 @@ export const Admin = () => {
                 Images: newList
             })
         };
-        await fetch(`http://localhost:8080/updateProduct/${product.id}`, Options);
+        await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/updateProduct/${product.id}`, Options);
     };
 
     const handleChange = (e) => {
@@ -60,7 +60,7 @@ export const Admin = () => {
     }
 
     const handleDeleteClick = async (id) => {
-        await fetch(`http://localhost:8080/deleteProduct/${id}`, {
+        await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/deleteProduct/${id}`, {
             method: 'DELETE',
         }).then(response => response.json())
     }
@@ -79,7 +79,7 @@ export const Admin = () => {
                 Images: newList
             })
         };
-        await fetch(`http://localhost:8080/updateProduct/${product.id}`, Options);
+        await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/updateProduct/${product.id}`, Options);
     }
 
     const handleAddProductClick = async (ProductName, Price, description, newImage) => {
@@ -100,7 +100,7 @@ export const Admin = () => {
                     Images: list
                 })
             };
-            await fetch(`http://localhost:8080/setProduct`, Options);
+            await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/setProduct`, Options);
         }
     }
 

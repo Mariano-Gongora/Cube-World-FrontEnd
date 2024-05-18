@@ -41,7 +41,7 @@ export const Login_SignUp = () => {
                     CartList: []
                 })
             };
-            const res=await fetch('http://localhost:8080/setProfile', requestOptions);
+            const res=await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/setProfile', requestOptions);
             if(res.status==200){
             const loginOptions = {
                 method: 'POST',
@@ -51,7 +51,7 @@ export const Login_SignUp = () => {
                     password: Password.toString()
                 })
             };
-            const response = await fetch('http://localhost:8080/login', loginOptions);
+            const response = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/login', loginOptions);
             const data = await response.json();
             updateCart(data.cartList);
             LogInState(true);
@@ -84,7 +84,7 @@ export const Login_SignUp = () => {
                     password: Password.toString(),
                 })
             };
-            const response = await fetch('http://localhost:8080/login', requestOptions);
+            const response = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/login', requestOptions);
             const data = await response.json();
             updateCart(data.cartList);
             LogInState(true);
@@ -139,11 +139,11 @@ export const Login_SignUp = () => {
 
     useEffect(() => {
         if (search) {
-            fetch(`http://localhost:8080/Products/${search}`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products/${search}`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         } else {
-            fetch(`http://localhost:8080/Products`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         }

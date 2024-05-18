@@ -17,7 +17,7 @@ export const Cart = () => {
         let data
         removeFromCart(key);
         setTrigger(!trigger);
-        let response1= await fetch(`http://localhost:8080/getUser/${user}`)
+        let response1= await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getUser/${user}`)
             data=await response1.json();
             const requestOptions = {
                 method: 'PUT',
@@ -31,13 +31,13 @@ export const Cart = () => {
 
                 })
             };
-            const response2 = await fetch(`http://localhost:8080/updateUser/${user}`, requestOptions);
+            const response2 = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/updateUser/${user}`, requestOptions);
             const data2 = await response2.json();
     };
 
     const fetchItemsFromIds = (async () => {
         const itemPromises = cart.map(async (itemId) => {
-            const response = await fetch(`http://localhost:8080/getProductFromId/${itemId}`);
+            const response = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getProductFromId/${itemId}`);
             return await response.json();
         });
 

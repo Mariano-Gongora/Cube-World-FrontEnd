@@ -12,7 +12,7 @@ export const BestSellers = () => {
     
 
     useEffect(() => {
-        fetch(`http://localhost:8080/bestSellers`)
+        fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/bestSellers`)
             .then(response => response.json())
             .then(data => setProducts(data));
     }, []);

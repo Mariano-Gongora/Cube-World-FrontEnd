@@ -16,11 +16,11 @@ export const Products = () => {
 
     useEffect(() => {
         if (search) {
-            fetch(`http://localhost:8080/Products/${search}`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products/${search}`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         } else {
-            fetch(`http://localhost:8080/Products`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         }
