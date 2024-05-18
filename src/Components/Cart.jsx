@@ -71,7 +71,7 @@ export const Cart = () => {
                         <div className='inner-cart-div'>${(items[index]).price}</div>
                         <div className='trash-btn' onClick={() => onTrashClick(index)} ><TbTrashX /></div>
                     </div>
-                            
+                           
 
                 ))
                 }
