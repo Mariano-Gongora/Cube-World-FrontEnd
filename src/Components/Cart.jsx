@@ -36,8 +36,11 @@ export const Cart = () => {
     const fetchItemsFromIds = (async () => {
         try {
             const itemPromises = cart.map(async (itemId) => {
+                if(itemId=="null"){}
+                else{
                 const response = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getProductFromId/${itemId}`);
                 return await response.json();
+                }
             });
 
             const itemsData = await Promise.all(itemPromises);
@@ -62,16 +65,13 @@ export const Cart = () => {
         <>
             <div className='cart'>Cart
                 {items.map((item, index) => (
-                    (() => {
-                        if ((items[index]).Images[0]!=null) {
-                            <div key={item} className='cart-item'>
-                                <img className='cart-item-picture' src={(items[index]).Images[0]} />
-                                <div className='inner-cart-div'>{(items[index]).productName}</div>
-                                <div className='inner-cart-div'>${(items[index]).price}</div>
-                                <div className='trash-btn' onClick={() => onTrashClick(index)} ><TbTrashX /></div>
-                            </div>
-                        }
-                    })
+                        <div key={item} className='cart-item'>
+                        <img className='cart-item-picture' src={(items[index]).Images[0]} />
+                        <div className='inner-cart-div'>{(items[index]).productName}</div>
+                        <div className='inner-cart-div'>${(items[index]).price}</div>
+                        <div className='trash-btn' onClick={() => onTrashClick(index)} ><TbTrashX /></div>
+                    </div>
+                           
 
                 ))
                 }
