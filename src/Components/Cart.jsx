@@ -34,6 +34,7 @@ export const Cart = () => {
     };
 
     const fetchItemsFromIds = (async () => {
+        try{
         const itemPromises = cart.map(async (itemId) => {
             const response = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getProductFromId/${itemId}`);
             return await response.json();
@@ -42,6 +43,8 @@ export const Cart = () => {
         const itemsData = await Promise.all(itemPromises);
         setItems(itemsData);
 
+    }
+    catch(err){console.log(err);}
     });
 
     useEffect(() => {
