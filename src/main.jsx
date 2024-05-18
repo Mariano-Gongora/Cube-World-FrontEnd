@@ -37,6 +37,7 @@ export const CartProvider = ({ children }) => {
 
   const updateCart = (list) =>{
     setCart(list);
+    setaddTrigger(!addTrigger);
   };
 
   const removeFromCart = (key) => {
