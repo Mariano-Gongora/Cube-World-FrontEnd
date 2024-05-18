@@ -17,17 +17,18 @@ export const Home = () => {
     setShowingCart((showingCart) => !showingCart);
   };
 
-  useEffect(() => {
+   useEffect(() => {
     if (localStorage.getItem("user")) {
 
       updateCart(localStorage.getItem("cart").split(','))
     }
     else {
       localStorage.setItem("cart","")
+      if(localStorage.getItem("cart")[0]===null){
+        removeFromCart(0);
+      }
     }
-    if(localStorage.getItem("cart")==="null"){
-      removeFromCart(0);
-    }
+    
   }, []);
 
 
