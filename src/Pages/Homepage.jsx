@@ -1,65 +1,35 @@
 import { LowerButtons } from '../Components/LowerButtons.jsx'
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import { FaShoppingCart,FaSearch } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import '../Styles.css'
-import { useCart,useUser } from '../main';
+import { useCart } from '../main';
 import React from "react";
 import BestSellers from '../Components/BestSellers.jsx';
 import Cart from '../Components/Cart.jsx';
+import Homebar from '../Components/Homebar.jsx';
 
 
 export const Home = () => {
-  const { cart, updateCart } = useCart();
-  const {user} = useUser();
-  const [searchTerm, setSearchTerm] = useState('');
+  const { updateCart } = useCart();
   const [showingCart, setShowingCart] = useState(false);
-  const navigate = useNavigate();
-  const handle_login_signup_click = () => navigate('/login_signup');
-  const handle_logo_click = () => navigate('/');
-
-  const onEnterPress = () => {
-    navigate(`/products/${searchTerm}`);
-  };
-
-  const onSearchPress= () =>{
-    navigate(`/products/${searchTerm}`);
-  }
-
-  const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
 
   const clickCartButton = () => {
     setShowingCart((showingCart) => !showingCart);
   };
 
-  useEffect(()=>{
-    if(localStorage.getItem("user")){
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
 
       updateCart(localStorage.getItem("cart").split(','))
     }
-    else{
-      localStorage.setItem("cart",[])
+    else {
+      localStorage.setItem("cart", [])
     }
   }, []);
 
   return (
     <>
-      <div className="header">
-        <div className='search-bar-pair'>
-          <input type="text" value={searchTerm} onKeyDown={(event) => { if (event.key === "Enter") { onEnterPress() } }} onChange={handleInputChange} placeholder="Search" className='search-input' />
-          <button className='search-btn' onClick={onSearchPress}><FaSearch /></button>
-        </div>
-        
-        <div>
-          <label className='Cube-World-Logo' onClick={handle_logo_click}>Cube World</label>
-        </div>
-        <div>
-          {localStorage.getItem("user") ? <label className='login-signup-label' onClick={handle_login_signup_click}>View Profile</label> : <label className='login-signup-label' onClick={handle_login_signup_click}>Login/Sign Up</label> }
-        </div>
-
-      </div>
+      <Homebar />
       <div className='under-header-buttons'>
       </div>
       <LowerButtons />

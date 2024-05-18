@@ -3,8 +3,8 @@ import '../Styles.css'
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { FaSearch } from "react-icons/fa";
 import { useCart, useUser } from '../main';
+import Homebar from '../Components/Homebar.jsx';
 
 export const Login_SignUp = () => {
 
@@ -14,13 +14,10 @@ export const Login_SignUp = () => {
     const [Password, setPassword] = useState("");
     const [toggleSignUp, setToggleSignUp] = useState(true);
     const { search } = useParams();
-    const [searchTerm, setSearchTerm] = useState('');
     const { updateCart } = useCart();
-    const { user,LogInState, setUserID } = useUser();
+    const { LogInState, setUserID } = useUser();
+    const navigate = useNavigate();
 
-    const onSearchPress = () => {
-        navigate(`/products/${searchTerm}`);
-    }
 
     async function signUp() {
         if ((FirstName === "") || (LastName === "") || (Email === "") || (Password === "")) {
@@ -44,7 +41,7 @@ export const Login_SignUp = () => {
                     CartList: []
                 })
             };
-            const res=await fetch('http://localhost:8080/setProfile', requestOptions);
+            const res=await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/setProfile', requestOptions);
             if(res.status==200){
             const loginOptions = {
                 method: 'POST',
@@ -54,7 +51,7 @@ export const Login_SignUp = () => {
                     password: Password.toString()
                 })
             };
-            const response = await fetch('http://localhost:8080/login', loginOptions);
+            const response = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/login', loginOptions);
             const data = await response.json();
             updateCart(data.cartList);
             LogInState(true);
@@ -87,7 +84,7 @@ export const Login_SignUp = () => {
                     password: Password.toString(),
                 })
             };
-            const response = await fetch('http://localhost:8080/login', requestOptions);
+            const response = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/login', requestOptions);
             const data = await response.json();
             updateCart(data.cartList);
             LogInState(true);
@@ -138,29 +135,19 @@ export const Login_SignUp = () => {
         setPassword("")
     }
 
-    const navigate = useNavigate();
-    const handle_login_signup_click = () => navigate('/login_signup');
-    const handle_logo_click = () => navigate('/');
+ 
 
     useEffect(() => {
         if (search) {
-            fetch(`http://localhost:8080/Products/${search}`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products/${search}`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         } else {
-            fetch(`http://localhost:8080/Products`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         }
     }, [search]);
-
-    const onEnterPress = () => {
-        navigate(`/products/${searchTerm}`);
-    };
-
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
 
     const Log_out_click=()=>{
         localStorage.removeItem("user")
@@ -170,18 +157,7 @@ export const Login_SignUp = () => {
 
     return (
         <>
-            <div className="header">
-                <div className='search-bar-pair'>
-                    <input type="text" onKeyDown={(event) => { if (event.key === "Enter") { onEnterPress() } }} value={searchTerm} onChange={handleInputChange} placeholder="Search" className='search-input' />
-                    <button className='search-btn' onClick={onSearchPress}><FaSearch /></button>
-                </div>
-                <div>
-                    <label className='Cube-World-Logo' onClick={handle_logo_click}>Cube World</label>
-                </div>
-                <div>
-                {localStorage.getItem("user") ? <label className='login-signup-label' onClick={handle_login_signup_click}>View Profile</label> : <label className='login-signup-label' onClick={handle_login_signup_click}>Login/Sign Up</label> }
-                </div>
-            </div>
+            <Homebar/>
             {localStorage.getItem("user") ?
                 <div className='sign-up-log-in-page'>
                     <div className='log-in'>Logged in as: {localStorage.getItem("user")}<button onClick={Log_out_click}>Log Out</button></div>

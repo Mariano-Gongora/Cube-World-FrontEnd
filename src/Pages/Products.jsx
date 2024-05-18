@@ -6,24 +6,21 @@ import { FaShoppingCart,FaSearch } from "react-icons/fa";
 import ProductView from "../Components/ProductView.jsx";
 import Cart from '../Components/Cart.jsx';
 import React from "react"
+import Homebar from '../Components/Homebar.jsx';
 
 export const Products = () => {
     const { search } = useParams();
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showingCart, setShowingCart] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
-    const navigate = useNavigate();
-    const handle_login_signup_click = () => navigate('/login_signup');
-    const handle_logo_click = () => navigate('/');
 
     useEffect(() => {
         if (search) {
-            fetch(`http://localhost:8080/Products/${search}`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products/${search}`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         } else {
-            fetch(`http://localhost:8080/Products`)
+            fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products`)
                 .then(response => response.json())
                 .then(data => setProducts(data));
         }
@@ -36,18 +33,6 @@ export const Products = () => {
         setSelectedProduct(product);
     };
 
-    const onEnterPress = () => {
-        navigate(`/products/${searchTerm}`);
-    };
-
-    const onSearchPress= () =>{
-        navigate(`/products/${searchTerm}`);
-    }
-
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
     const handleSetState = () => {
         setSelectedProduct(null);
     }
@@ -58,19 +43,7 @@ export const Products = () => {
 
     return (
         <>
-            <div className="header">
-                <div className='search-bar-pair'>
-                    <input type="text" onKeyDown={(event) => { if (event.key === "Enter") { onEnterPress() } }} value={searchTerm} onChange={handleInputChange} placeholder="Search" className='search-input' />
-                    <button className='search-btn' onClick={onSearchPress}><FaSearch /></button>
-                </div>
-                <div>
-                    <label className='Cube-World-Logo' onClick={handle_logo_click}>Cube World</label>
-                </div>
-                <div>
-                {localStorage.getItem("user") ? <label className='login-signup-label' onClick={handle_login_signup_click}>View Profile</label> : <label className='login-signup-label' onClick={handle_login_signup_click}>Login/Sign Up</label> }
-                </div>
-
-            </div>
+            <Homebar/>
             <section className='products-page'>
                 {products.length === 0 ? (
                     <div>No products found</div>
