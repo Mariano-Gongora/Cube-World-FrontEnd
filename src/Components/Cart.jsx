@@ -44,7 +44,7 @@ export const Cart = () => {
         setItems(itemsData);
 
     }
-    catch(err){console.log(err);}
+    catch(err){}
     });
 
     useEffect(() => {
