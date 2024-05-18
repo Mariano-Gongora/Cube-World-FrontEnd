@@ -45,12 +45,12 @@ export const CartProvider = ({ children }) => {
     setremoveTrigger(!removeTrigger);//calls useEffect #2, the purpose is to save the changes made to "cart" to the localstorage
   };
 
-  useEffect(()=>{//useEffect #1
+   useEffect(()=>{//useEffect #1
     if(localStorage.getItem("user"))
       localStorage.setItem("cart",[])
     if(!localStorage.getItem("user"))
-      localStorage.setItem("cart",[])
-    else if(cart.length>1){
+      localStorage.setItem("cart",cart)
+    else if(cart.length>0){
       localStorage.setItem("cart",cart) 
     }
     },[addTrigger])
