@@ -69,6 +69,9 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
             localStorage.setItem("cart",selectedProduct.id)
             updateCart(localStorage.getItem("cart").split(','))
         }else{
+            if(localStorage.getItem("cart")[0]===null){
+                removeFromCart(0);
+              }
             const prevCart=localStorage.getItem("cart")
             const fullList=prevCart+","+selectedProduct.id
             localStorage.setItem("cart",fullList)
