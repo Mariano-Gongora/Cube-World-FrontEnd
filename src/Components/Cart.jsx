@@ -3,11 +3,10 @@ import '../Styles.css';
 import { useCart } from '../main';
 import { useUser } from '../main';
 import { TbTrashX } from "react-icons/tb";
-import ProductView from "../Components/ProductView.jsx";
 
 export const Cart = () => {
     const { cart, updateCart } = useCart();
-    const { user, loggedIn } = useUser();
+    const { user } = useUser();
     const [items, setItems] = useState([]);
     const [trigger,setTrigger]= useState(false);
 
@@ -32,7 +31,6 @@ export const Cart = () => {
                 })
             };
             const response2 = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/updateUser/${user}`, requestOptions);
-            const data2 = await response2.json();
     };
 
     const fetchItemsFromIds = (async () => {
