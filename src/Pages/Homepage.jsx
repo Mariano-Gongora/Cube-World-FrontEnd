@@ -17,16 +17,21 @@ export const Home = () => {
     setShowingCart((showingCart) => !showingCart);
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
+   useEffect(() => {
+  const user = localStorage.getItem("user");
+  let cart = localStorage.getItem("cart");
 
-      updateCart(localStorage.getItem("cart").split(','))
+  if (user) {
+    // Check if cart is "null" or null, and initialize properly
+    if (cart === null || cart === "null") {
+      cart = "";
+      localStorage.setItem("cart", cart);
     }
-    else {
-      localStorage.setItem("cart",[""])
-    }
-    
-  }, []);
+    updateCart(cart.split(','));
+  } else {
+    localStorage.setItem("cart", "");
+  }
+}, []);
 
   return (
     <>
