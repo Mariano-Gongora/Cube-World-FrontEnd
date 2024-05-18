@@ -18,14 +18,20 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+  const user = localStorage.getItem("user");
+  const cart = localStorage.getItem("cart");
 
-      updateCart(localStorage.getItem("cart").split(','))
+  if (user) {
+    if (cart) {
+      updateCart(JSON.parse(cart));  // Assuming cart is stored as a JSON string
+    } else {
+      updateCart([]);  // Initialize with an empty array if cart is not set
     }
-    else {
-      localStorage.setItem("cart",JSON.stringify(""))
-    }
-  }, []);
+  } else {
+    localStorage.setItem("cart", JSON.stringify([]));  // Store an empty array as a JSON string
+  }
+}, []);
+
 
   return (
     <>
