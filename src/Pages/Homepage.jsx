@@ -23,7 +23,7 @@ export const Home = () => {
       updateCart(localStorage.getItem("cart").split(','))
     }
     else {
-      localStorage.setItem("cart",JSON.parse(""))
+      localStorage.setItem("cart",[""])
     }
     
   }, []);
