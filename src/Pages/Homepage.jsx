@@ -25,7 +25,7 @@ export const Home = () => {
     else {
       localStorage.setItem("cart","")
     }
-    if(localStorage.getItem("cart")===null){
+    if(localStorage.getItem("cart")==="null"){
       removeFromCart(0);
     }
   }, []);
