@@ -33,8 +33,6 @@ export const Home = () => {
   }
 }, []);
 
-
-
   return (
     <>
       <Homebar />
