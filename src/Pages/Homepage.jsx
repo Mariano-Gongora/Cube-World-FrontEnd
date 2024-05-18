@@ -23,8 +23,10 @@ export const Home = () => {
       updateCart(localStorage.getItem("cart").split(','))
     }
     else {
-      var newList = [];
-      localStorage.setItem("cart", newList)
+      localStorage.setItem("cart","")
+    }
+    if(localStorage.getItem("cart")===null){
+      removeFromCart(0);
     }
   }, []);
 
