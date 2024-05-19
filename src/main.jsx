@@ -46,11 +46,7 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(()=>{//useEffect #1
-    if(localStorage.getItem("user"))
-      localStorage.setItem("cart",[])
-    if(!localStorage.getItem("user"))
-      localStorage.setItem("cart",cart)
-    else if(cart.length>1){
+    if(cart.length>1){
       localStorage.setItem("cart",cart) 
     }
     },[addTrigger])
