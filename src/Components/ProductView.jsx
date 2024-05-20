@@ -115,7 +115,7 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
             <dialog id="selected-item-dialog" onKeyDown={(event) => { if (event.key === "Escape") { handleSetState() } }}>
                 {showModal && (
                     <>
-                        <IoClose style={{ paddingTop: "0px" , cursor:"pointer"}} onClick={handleCloseClick} size={30}/>
+                        <IoClose style={{ paddingTop: "0px" , cursor:"pointer"}} onClick={handleCloseClick} size={40}/>
                         {selectedProduct && (
                             <>
                                 <div className='image-slider'>
