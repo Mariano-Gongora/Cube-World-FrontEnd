@@ -1,4 +1,4 @@
-#Cube World
+Cube World!
 
 A fun personal project that came about when I realized I could not build an e-commerce website for my friend's small business. I learned to make a REST API using Spring Boot, a nice looking UI using React, HTML, and CSS, and stored all data on a MySQL database.
 
