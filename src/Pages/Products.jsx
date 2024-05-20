@@ -13,8 +13,13 @@ export const Products = () => {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showingCart, setShowingCart] = useState(false);
+    const [showDelayedText, setShowDelayedText] = useState(true);
 
     useEffect(() => {
+        setTimeout(() => {
+            setShowDelayedText(false);
+        }, 6000)
+
         if (search) {
             fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/Products/${search}`)
                 .then(response => response.json())
@@ -45,7 +50,10 @@ export const Products = () => {
         <>
             <Homebar/>
             <section className='products-page'>
-                {products.length === 0 ? (
+            {showDelayedText ? (
+                    <div>Loading...</div>
+            ):
+                (products.length === 0 ? (
                     <div>No products found</div>
                 ) : (
                     products.map((product, index) => (
@@ -60,7 +68,8 @@ export const Products = () => {
                             <button className='view-btn' onClick={() => handleViewClick(product)}>View</button>
                         </div>
                     ))
-                )}
+                ))
+            }
             </section>
             {showingCart && <Cart />}
             <button className='cart-button' onClick={clickCartButton}><FaShoppingCart className="shopping-cart-icon" /></button>
