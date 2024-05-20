@@ -72,12 +72,11 @@ export const Cart = () => {
                 ) :
                     (items.map((item, index) => (
                         <div key={item} className='cart-item'>
-                            <img className='cart-item-picture' src={(items[index]).Images[0]} />
-                            <div className='inner-cart-div'>{(items[index]).productName}</div>
-                            <div className='inner-cart-div'>${(items[index]).price}</div>
-                            <div className='trash-btn' onClick={() => onTrashClick(index)} ><TbTrashX /></div>
-                        </div>
-
+                        <img className='cart-item-picture' src={(items[index]).Images[0]} />
+                        <div className='inner-cart-div'>{(items[index]).productName}</div>
+                        <div className='inner-cart-div'>${(items[index]).price}</div>
+                        <div className='trash-btn' onClick={() => onTrashClick(index)} ><TbTrashX /></div>
+                    </div>
 
                     ))
                     )
