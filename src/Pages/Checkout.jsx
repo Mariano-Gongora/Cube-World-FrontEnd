@@ -34,9 +34,15 @@ export const Checkout = () => {
     });
 
     const handlePayOnClick = async () => {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
         updateCart(0)
         localStorage.setItem("cart", [])
-        navigate('/');
+        setTimeout(() => {
+            navigate('/');
+        }, 3000)
+        
         let data
         if (localStorage.getItem("user")) {
             let response = await fetch(`https://cube-world-api-3a55a0cf69a0.herokuapp.com/getUser/${user}`)
@@ -126,6 +132,7 @@ export const Checkout = () => {
                     }
                 </div>
             </div>
+            <div id="snackbar">Ordered successfully!</div>
 
 
 
