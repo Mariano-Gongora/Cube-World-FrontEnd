@@ -41,28 +41,28 @@ export const Login_SignUp = () => {
                     CartList: []
                 })
             };
-            const res=await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/setProfile', requestOptions);
-            if(res.status==200){
-            const loginOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: Email.toString(),
-                    password: Password.toString()
-                })
-            };
-            const response = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/login', loginOptions);
-            const data = await response.json();
-            updateCart(data.cartList);
-            LogInState(true);
-            setUserID(data.id)
-            localStorage.setItem("user", data.email)
-            localStorage.setItem("cart", data.cartList)
-            navigate('/')
-        }
-        else{
-            alert("There is already a user with that email address")
-        }
+            const res = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/setProfile', requestOptions);
+            if (res.status == 200) {
+                const loginOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: Email.toString(),
+                        password: Password.toString()
+                    })
+                };
+                const response = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/login', loginOptions);
+                const data = await response.json();
+                updateCart(data.cartList);
+                LogInState(true);
+                setUserID(data.id)
+                localStorage.setItem("user", data.email)
+                localStorage.setItem("cart", data.cartList)
+                navigate('/')
+            }
+            else {
+                alert("There is already a user with that email address")
+            }
         }
     }
 
@@ -85,13 +85,16 @@ export const Login_SignUp = () => {
                 })
             };
             const response = await fetch('https://cube-world-api-3a55a0cf69a0.herokuapp.com/login', requestOptions);
+            if (response.status === 401) {
+                alert("Non-matched Email and Password")
+            }
             const data = await response.json();
             updateCart(data.cartList);
             LogInState(true);
             setUserID(data.id)
             localStorage.setItem("user", data.email)
             localStorage.setItem("cart", data.cartList)
-            if(data.admin===true){
+            if (data.admin === true) {
                 navigate('/Admin')
             }
             else
@@ -135,7 +138,7 @@ export const Login_SignUp = () => {
         setPassword("")
     }
 
- 
+
 
     useEffect(() => {
         if (search) {
@@ -149,7 +152,7 @@ export const Login_SignUp = () => {
         }
     }, [search]);
 
-    const Log_out_click=()=>{
+    const Log_out_click = () => {
         localStorage.removeItem("user")
         setUserID("")
         navigate('/')
@@ -157,20 +160,20 @@ export const Login_SignUp = () => {
 
     return (
         <>
-            <Homebar/>
+            <Homebar />
             {localStorage.getItem("user") ?
                 <div className='sign-up-log-in-page'>
                     <div className='log-in'>Logged in as: {localStorage.getItem("user")}<button onClick={Log_out_click}>Log Out</button></div>
-                    
+
                 </div>
                 :
                 <div className='sign-up-log-in-page'>
                     {toggleSignUp && <div className='log-in'>
                         <div>Log In</div>
 
-                        <input placeholder="email" type="text" value={Email} onChange={handleEmailChange} />
+                        <input placeholder="Email" type="text" value={Email} onChange={handleEmailChange} />
 
-                        <input placeholder="password" type="text" value={Password} onChange={handlePasswordChange} />
+                        <input placeholder="Password" type="password" value={Password} onChange={handlePasswordChange} />
 
                         <label id='alert'>one or more fields is empty</label>
 
@@ -182,13 +185,13 @@ export const Login_SignUp = () => {
                     {!toggleSignUp && <div className='sign-up'>
                         <div>Sign Up</div>
 
-                        <input placeholder="firstname" type="text" value={FirstName} onChange={handleFirstNameChange} />
+                        <input placeholder="First Name" type="text" value={FirstName} onChange={handleFirstNameChange} />
 
-                        <input placeholder="lastname" type="text" value={LastName} onChange={handleLastNameChange} />
+                        <input placeholder="Last Name" type="text" value={LastName} onChange={handleLastNameChange} />
 
-                        <input placeholder="email" type="text" value={Email} onChange={handleEmailChange} />
+                        <input placeholder="Email" type="text" value={Email} onChange={handleEmailChange} />
 
-                        <input placeholder="password" type="text" value={Password} onChange={handlePasswordChange} />
+                        <input placeholder="Password" type="password" value={Password} onChange={handlePasswordChange} />
 
                         <label id='alert'>One or more fields is empty</label>
 

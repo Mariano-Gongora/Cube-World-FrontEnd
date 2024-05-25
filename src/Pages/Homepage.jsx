@@ -12,6 +12,7 @@ import Homebar from '../Components/Homebar.jsx';
 export const Home = () => {
   const { updateCart } = useCart();
   const [showingCart, setShowingCart] = useState(false);
+  const [numberOfItems, setnumberOfItems] = useState(0)
 
   const clickCartButton = () => {
     setShowingCart((showingCart) => !showingCart);
@@ -23,6 +24,22 @@ export const Home = () => {
     }
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (localStorage.getItem("cart").length > 0) {
+        setnumberOfItems(localStorage.getItem("cart").split(',').length);
+      }
+      else if (localStorage.getItem("cart").length == 0)
+        setnumberOfItems(0)
+    }, 10)
+
+
+  }, [updateCart], [localStorage.getItem("cart")]);
+
+
+
+
+
   return (
     <>
       <Homebar />
@@ -32,7 +49,8 @@ export const Home = () => {
       <h1 className='best-seller-label'>BEST SELLERS: </h1>
       <BestSellers />
       {showingCart && <Cart />}
-      <button className='cart-button' onClick={clickCartButton}><FaShoppingCart className="shopping-cart-icon" /></button>
+      <button className='cart-button' onClick={clickCartButton}><FaShoppingCart className="shopping-cart-icon" />{numberOfItems > 0 && <div className='Cart-Item-Counter'>{numberOfItems}</div>}</button>
+
     </>
   );
 };
