@@ -14,6 +14,9 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
     const { cart } = useCart();
 
     const handleAddToCartClick = async (selectedProduct) => {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
         let data
         if (localStorage.getItem("user") && localStorage.getItem("cart").length < 1) {
 
@@ -73,10 +76,6 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
             updateCart(localStorage.getItem("cart").split(','))
         }
 
-        var x = document.getElementById("snackbar");
-        x.className = "show";
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
-
     };
 
     useEffect(() => {
@@ -119,7 +118,7 @@ export const ProductView = ({ selectedProduct, handleSetState }) => {
             <dialog id="selected-item-dialog" onKeyDown={(event) => { if (event.key === "Escape") { handleSetState() } }}>
                 {showModal && (
                     <>
-                        <IoClose style={{ paddingTop: "0px" , cursor:"pointer"}} onClick={handleCloseClick} size={40}/>
+                        <IoClose style={{ paddingTop: "0px", cursor: "pointer" }} onClick={handleCloseClick} size={40} />
                         {selectedProduct && (
                             <>
                                 <div className='image-slider'>
