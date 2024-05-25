@@ -9,13 +9,13 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState("");
-  const [loggedIn, setLoggedIn]=useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const setUserID = (ID) => {
     setUser(ID);
   };
 
-  const LogInState=(bool)=>{
+  const LogInState = (bool) => {
     setLoggedIn(bool);
   };
 
@@ -32,10 +32,10 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [addTrigger,setaddTrigger]= useState(false); //checks if the user exists
-  const [removeTrigger,setremoveTrigger]= useState(false);
+  const [addTrigger, setaddTrigger] = useState(false); //checks if the user exists
+  const [removeTrigger, setremoveTrigger] = useState(false);
 
-  const updateCart = (list) =>{
+  const updateCart = (list) => {
     setCart(list);
     setaddTrigger(!addTrigger);
   };
@@ -45,18 +45,18 @@ export const CartProvider = ({ children }) => {
     setremoveTrigger(!removeTrigger);//calls useEffect #2, the purpose is to save the changes made to "cart" to the localstorage
   };
 
-  useEffect(()=>{//useEffect #1
-    if(cart.length>1){
-      localStorage.setItem("cart",cart) 
+  useEffect(() => {//useEffect #1
+    if (cart.length > 1) {
+      localStorage.setItem("cart", cart)
     }
-    },[addTrigger])
+  }, [addTrigger])
 
-    useEffect(()=>{//useEffect #2
-      localStorage.setItem("cart",cart)
-      },[removeTrigger])
+  useEffect(() => {//useEffect #2
+    localStorage.setItem("cart", cart)
+  }, [removeTrigger])
 
   return (
-    <CartContext.Provider value={{ cart, removeFromCart, updateCart}}>
+    <CartContext.Provider value={{ cart, removeFromCart, updateCart }}>
       {children}
     </CartContext.Provider>
   );

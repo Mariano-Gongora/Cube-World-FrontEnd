@@ -83,7 +83,7 @@ export const Admin = () => {
     }
 
     const handleAddProductClick = async (ProductName, Price, description, newImage) => {
-        var list= new Array();
+        var list = new Array();
         list.push(NewImage)
         if (ProductName === "" || Price === "" || description === "" || newImage === "") {
             alert("Missing a field for new item")
@@ -106,50 +106,50 @@ export const Admin = () => {
 
     return (
         <>
-        <Homebar/>
-        <div>
-            <section className='products-page'>
-                {products.length === 0 ? (
-                    <div>No products found</div>
-                ) : (
-                    products.map((product, index) => (
-                        <div className='product' key={index}>
-                            <div className='info'>
-                                {product.Images.map((image, imgIndex) => (
-                                    <>
-                                        <img className="image" src={image}></img>
-                                        <button onClick={() => { imgDelete(product, imgIndex) }}>Delete</button>
-                                    </>
-                                ))}
-                                <div><input type='file' id={'newImage' + index} onChange={handleChange}></input></div>
+            <Homebar />
+            <div>
+                <section className='products-page'>
+                    {products.length === 0 ? (
+                        <div>No products found</div>
+                    ) : (
+                        products.map((product, index) => (
+                            <div className='product' key={index}>
+                                <div className='info'>
+                                    {product.Images.map((image, imgIndex) => (
+                                        <>
+                                            <img className="image" src={image}></img>
+                                            <button onClick={() => { imgDelete(product, imgIndex) }}>Delete</button>
+                                        </>
+                                    ))}
+                                    <div><input type='file' id={'newImage' + index} onChange={handleChange}></input></div>
 
-                                <h1 >ID: {product.id}</h1>
-                                <label>Name:</label>
-                                <input id={'ProductName' + index} defaultValue={product.ProductName}></input>
-                                <label>Price:</label>
-                                <input id={'Price' + index} defaultValue={product.price}></input>
-                                <label>Description:</label>
-                                <input id={'description' + index} defaultValue={product.description}></input>
+                                    <h1 >ID: {product.id}</h1>
+                                    <label>Name:</label>
+                                    <input id={'ProductName' + index} defaultValue={product.ProductName}></input>
+                                    <label>Price:</label>
+                                    <input id={'Price' + index} defaultValue={product.price}></input>
+                                    <label>Description:</label>
+                                    <input id={'description' + index} defaultValue={product.description}></input>
+                                </div>
+                                <button className='view-btn' onClick={() => handleSaveClick(product, document.getElementById('ProductName' + index).value, document.getElementById('Price' + index).value, document.getElementById('description' + index).value, product.Images, product.sales)}>Save</button>
+                                <button className='view-btn' onClick={() => handleDeleteClick(product.id)}>Delete</button>
                             </div>
-                            <button className='view-btn' onClick={() => handleSaveClick(product, document.getElementById('ProductName' + index).value, document.getElementById('Price' + index).value, document.getElementById('description' + index).value, product.Images, product.sales)}>Save</button>
-                            <button className='view-btn' onClick={() => handleDeleteClick(product.id)}>Delete</button>
+                        ))
+                    )}
+                    <div className='best-seller-items'>
+                        <div className='info'>
+                            <div><input type='file' id={'newImage'} onChange={handleChange}></input></div>
+                            <label>Name:</label>
+                            <input id={'ProductName'} placeholder="ProductName"></input>
+                            <label>Price:</label>
+                            <input id={'Price'} placeholder="Price"></input>
+                            <label>Description:</label>
+                            <input id={'description'} placeholder="Description"></input>
+                            <button className='view-btn' onClick={() => handleAddProductClick(document.getElementById('ProductName').value, document.getElementById('Price').value, document.getElementById('description').value, document.getElementById('newImage').value)}>Add Product</button>
                         </div>
-                    ))
-                )}
-                <div className='best-seller-items'>
-                    <div className='info'>
-                        <div><input type='file' id={'newImage'} onChange={handleChange}></input></div>
-                        <label>Name:</label>
-                        <input id={'ProductName'} placeholder="ProductName"></input>
-                        <label>Price:</label>
-                        <input id={'Price'} placeholder="Price"></input>
-                        <label>Description:</label>
-                        <input id={'description'} placeholder="Description"></input>
-                        <button className='view-btn' onClick={() => handleAddProductClick(document.getElementById('ProductName').value, document.getElementById('Price').value, document.getElementById('description').value, document.getElementById('newImage').value)}>Add Product</button>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
         </>
     );
 };

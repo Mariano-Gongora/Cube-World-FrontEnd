@@ -3,6 +3,7 @@ import '../Styles.css';
 import { useCart } from '../main';
 import { useUser } from '../main';
 import { TbTrashX } from "react-icons/tb";
+import { useNavigate } from 'react-router-dom';
 
 export const Cart = () => {
     const { cart, updateCart } = useCart();
@@ -10,7 +11,9 @@ export const Cart = () => {
     const [items, setItems] = useState([]);
     const [trigger, setTrigger] = useState(false);
     const { removeFromCart } = useCart();
+    const [subtotal, setSubtotal] = useState(0);
     const [showDelayedText, setShowDelayedText] = useState(true);
+    const navigate = useNavigate();
 
     const onTrashClick = async (key) => {
         let data
@@ -52,6 +55,8 @@ export const Cart = () => {
 
     useEffect(() => {
         fetchItemsFromIds();
+        addToTotal();
+
     }, [localStorage.getItem("cart"), trigger]);
 
     useEffect(() => {
@@ -61,7 +66,26 @@ export const Cart = () => {
         if (localStorage.getItem("cart")) {
             updateCart(localStorage.getItem("cart").split(','))
         }
+
     }, []);
+
+    useEffect(() => {
+        addToTotal();
+
+    }, [items]);
+
+    const addToTotal = () => {
+        let total = 0
+        items.map((item, index) => (
+            total = (items[index]).price + total
+        ))
+        setSubtotal(total)
+    }
+
+    const handleCheckoutClick = () => {
+        navigate('/checkout')
+    }
+
 
     // Render cart items after items are fetched and loading is complete
     return (
@@ -69,6 +93,7 @@ export const Cart = () => {
             <div className='cart'>Cart
                 {showDelayedText ? (
                     <div>Loading...</div>
+
                 ) :
                     (items.map((item, index) => (
                         <div key={item} className='cart-item'>
@@ -77,12 +102,14 @@ export const Cart = () => {
                             <div className='inner-cart-div'>${(items[index]).price}</div>
                             <div className='trash-btn' onClick={() => onTrashClick(index)} ><TbTrashX /></div>
                         </div>
-
-
                     ))
                     )
                 }
+                <div style={{ paddingTop: "10px" }}>Items: {items.length}</div>
+                <div>Subtotal: ${subtotal}</div>
+                {localStorage.getItem("cart").length > 0 && <button className='checkout-btn' onClick={handleCheckoutClick}>Checkout</button>}
             </div>
+
         </>
     );
 };
