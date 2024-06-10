@@ -12,4 +12,5 @@ I created mockups for the design on MS paint to have some sort of structure to f
 
 Added admin level business logic for item adding, updating, and deleting only accessible to accounts with permissions.
 
-![image](https://github.com/Mariano-Gongora/Cube-World-FrontEnd/assets/74140893/fd42ba4b-d68a-4796-8f7a-e5ec0341241b)
+![image](https://github.com/Mariano-Gongora/Cube-World-FrontEnd/assets/74140893/42a4759a-5627-4453-a2c2-a2dd10c38365)
+
