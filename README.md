@@ -10,6 +10,6 @@ I created mockups for the design on MS paint to have some sort of structure to f
 ![image](https://github.com/Mariano-Gongora/Cube-World-FrontEnd/assets/74140893/ae1008dd-7164-4fb1-b0dd-c625b2c477a0)
 
 
-Added admin level business logic for item management only accessible to accounts with permissions.
+Added admin level business logic for item adding, updating, and deleting only accessible to accounts with permissions.
 
 ![image](https://github.com/Mariano-Gongora/Cube-World-FrontEnd/assets/74140893/fd42ba4b-d68a-4796-8f7a-e5ec0341241b)
